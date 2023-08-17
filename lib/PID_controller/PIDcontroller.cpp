@@ -7,7 +7,7 @@ PIDcontroller::PIDcontroller(double _kP, double _kI, double _kD) {
     kD = _kD;
 }
 
-PIDcontroller::printError() {
+void PIDcontroller::printError() {
     Serial.println(error);
 }
 

@@ -1,8 +1,10 @@
 #include <line_status.h>
 
-line_status::line_status(uint8_t* _pin, uint16_t * _threshold) {
-    pin = _pin;
-    threshold = _threshold;
+line_status::line_status(uint8_t _pin[5]) {
+    for (int i = 0; i < 5; i++) {
+        pin[i] = _pin[i];
+        pinMode(pin[i], INPUT);
+    }
     pinMode(pin[0], INPUT);
     pinMode(pin[1], INPUT);
     pinMode(pin[2], INPUT);
@@ -15,6 +17,7 @@ void line_status::updateLineStatus() {
 }
 
 int8_t line_status::getError() {
+    uint8_t error;
     if (status[0] & !status[1] & !status[2] & !status[3] & !status[4]) {
         error = -4;
     } else if (status[0] & status[1] & !status[2] & !status[3] & !status[4]) {
